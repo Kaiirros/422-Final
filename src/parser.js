@@ -15,6 +15,8 @@ module.exports = {
     setProcessed: function (proc) {
         this.processed = proc;
     },
+
+    // Takes file path to process
     processChange: function (file) {
         const outputFile = path.resolve(this.output, path.basename(file).replace('.csv', '.json'));
         const processedFile = path.resolve(this.processed, path.basename(file));
@@ -30,15 +32,23 @@ module.exports = {
             })
             .on('end', () => {
                 fs.rename(file, processedFile, (err) => {
-                    if (err) { return; }
+                    if (err) { 
+                        console.error('\x1b[38;2;255;0;0m%s\x1b[0m', err)
+                        return; 
+                    }
 
                     fs.writeFile(outputFile, JSON.stringify(rows, null, 2), (err) => {
-                        if (err) { return; }
+                        if (err) {
+                            console.error('\x1b[38;2;255;0;0m%s\x1b[0m', err)
+                            return; 
+                        }
 
                         console.info('\x1b[38;2;0;0;170m%s\x1b[0m', `Parsed ${file}`);
                     });
                 });
             })
-            .on('error', (err) => { });
+            .on('error', (err) => {
+                console.error('\x1b[38;2;255;0;0m%s\x1b[0m', err)
+            });
     }
 };

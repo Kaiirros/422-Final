@@ -1,0 +1,14 @@
+services:
+  apache:
+    image: ubuntu:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    container_name: 422-final
+    volumes:
+      - type: volume
+        target: /inbound
+      - type: volume
+        target: /outbound
+      - type: volume
+        target: /processed

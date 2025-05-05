@@ -28,10 +28,13 @@ module.exports = {
             persistent: true
         });
 
+        // On adding a file to the watched directories, parse or throw error
         watcher
             .on('add', (path) => {
                 parser.processChange(path);
             })
-            .on('error', (err) => { });
+            .on('error', (err) => {
+                console.error('\x1b[38;2;255;0;0m%s\x1b[0m', err)
+            });
     }
 };
