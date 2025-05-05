@@ -21,14 +21,17 @@ console.info();
 
 // Create the necessary directories if necessary
 if (!fs.existsSync(watched)) {
+    console.info('\x1b[36m%s\x1b[0m', "Creating Watched directory");
     fs.mkdirSync(watched);
 }
 
 if (!fs.existsSync(output)) {
+    console.info('\x1b[36m%s\x1b[0m', "Creating Output directory");
     fs.mkdirSync(output);
 }
 
 if (!fs.existsSync(processed)) {
+    console.info('\x1b[36m%s\x1b[0m',"Creating Proccessed directory");
     fs.mkdirSync(processed);
 }
 
